@@ -592,7 +592,8 @@
 
     <!-- Execution Engine Script -->
     <script>
-        const API_BASE_URL = "/api/challans"; // Netlify Redirect API or Local Express Server endpoint
+        // API Base Endpoint Configuration
+        const API_BASE_URL = "/api/challans"; 
 
         let currentSelectedPrice = 600;
         let authenticatedUserRole = null; 
@@ -625,7 +626,8 @@
                 const res = await fetch(API_BASE_URL);
                 if(res.ok) {
                     const mongoData = await res.json();
-                    localStorage.setItem('mhs_challan_database', JSON.stringify(mongoData));
+                    const records = mongoData.records || mongoData;
+                    localStorage.setItem('mhs_challan_database', JSON.stringify(records));
                     populateKhataDropdown();
                     renderLedgerRecords();
                 }
@@ -633,7 +635,42 @@
                 console.log("Database Sync Warning: Operating on LocalStorage cache fallback.");
             }
         }
-        window.addEventListener('DOMContentLoaded', fetchRecordsFromDatabase);
+
+        async function loadAdminDashboardData() {
+            try {
+                const response = await fetch(API_BASE_URL);
+                const data = await response.json();
+                
+                if (data.success && data.records) {
+                    renderAdminTable(data.records);
+                }
+            } catch (error) {
+                console.error('Database fetch error, LocalStorage fallback loading:', error);
+                const localData = JSON.parse(localStorage.getItem('mhs_challan_database') || '[]');
+                renderAdminTable(localData);
+            }
+        }
+
+        function renderAdminTable(records) {
+            const tableBody = document.getElementById('adminTableBody'); 
+            if (!tableBody) return;
+            
+            tableBody.innerHTML = records.map(item => `
+              <tr>
+                <td>${item.id}</td>
+                <td>${item.operator}</td>
+                <td>${item.item}</td>
+                <td>${item.debitNumeric}</td>
+                <td>${new Date(item.createdAt || item.timestamp).toLocaleString()}</td>
+              </tr>
+            `).join('');
+        }
+
+        // Consolidated DOM Initialization Event Listener
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchRecordsFromDatabase();
+            loadAdminDashboardData();
+        });
 
         function selectProduct(name, price) {
             document.getElementById('architecture_unit').value = name;
@@ -644,6 +681,23 @@
         function updatePriceFromSelection() {
             const selectElement = document.getElementById('architecture_unit');
             currentSelectedPrice = parseInt(selectElement.options[selectElement.selectedIndex].getAttribute('data-price')) || 600;
+        }
+
+        async function saveChallanEntry(entryData) {
+            let localEntries = JSON.parse(localStorage.getItem('mhs_challan_database') || '[]');
+            localEntries.push(entryData);
+            localStorage.setItem('mhs_challan_database', JSON.stringify(localEntries));
+
+            try {
+                await fetch(API_BASE_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(entryData)
+                });
+                console.log('✅ MongoDB me save ho gaya');
+            } catch (error) {
+                console.warn('⚠️ LocalStorage me saved hai, MongoDB sync offline hai');
+            }
         }
 
         // Dynamic Order Creation Workflow (Saves to MongoDB + LocalStorage)
@@ -678,21 +732,7 @@
                 status: 'Pending'
             };
 
-            // 1. Update LocalStorage immediately for instant local view
-            const localDatabase = JSON.parse(localStorage.getItem('mhs_challan_database')) || [];
-            localDatabase.unshift(newRecord);
-            localStorage.setItem('mhs_challan_database', JSON.stringify(localDatabase));
-
-            // 2. Post to Mongo DB Collection
-            try {
-                await fetch(API_BASE_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newRecord)
-                });
-            } catch(err) {
-                console.error("MongoDB Async POST Error:", err);
-            }
+            await saveChallanEntry(newRecord);
             
             showChallanPopup(newRecord);
             populateKhataDropdown();
@@ -1133,96 +1173,6 @@
             camera.aspect = container.clientWidth / container.clientHeight; camera.updateProjectionMatrix();
             renderer.setSize(container.clientWidth, container.clientHeight);
         });
-        // Local Testing ke liye localhost, Live Backend ke baad URL update karein
-const API_BASE_URL = '/api'; 
-
-async function saveChallanEntry(entryData) {
-  // 1. LocalStorage me save karein
-  let localEntries = JSON.parse(localStorage.getItem('mhs_challans') || '[]');
-  localEntries.push(entryData);
-  localStorage.setItem('mhs_challans', JSON.stringify(localEntries));
-  console.log('✅ LocalStorage me save ho gaya');
-
-  // 2. MongoDB Cloud me save karein
-  try {
-    const response = await fetch(API_BASE_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(entryData)
-    });
-    const result = await response.json();
-    if (result.success) {
-      console.log('✅ MongoDB Database me save ho gaya');
-    }
-  } catch (error) {
-    console.warn('⚠️ MongoDB Sync Fail hua, par LocalStorage me Data Safe hai:', error);
-  }
-
-}
-
-
-
-
-  // --- STEP 3 CODE ---
-  const API_BASE_URL = 'http://localhost:5000/api/challans'; 
-
-  async function saveChallanEntry(entryData) {
-    let localEntries = JSON.parse(localStorage.getItem('mhs_challans') || '[]');
-    localEntries.push(entryData);
-    localStorage.setItem('mhs_challans', JSON.stringify(localEntries));
-
-    try {
-      await fetch(API_BASE_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(entryData)
-      });
-      console.log('✅ MongoDB me save ho gaya');
-    } catch (error) {
-      console.warn('⚠️ LocalStorage me saved hai, MongoDB sync offline hai');
-    }
-  }
-
-
-  // --- STEP 4 CODE (Is ke theek niche paste karein) ---
-  async function loadAdminDashboardData() {
-    try {
-      const response = await fetch(API_BASE_URL);
-      const data = await response.json();
-      
-      if (data.success && data.records) {
-        renderAdminTable(data.records); // Database ka data render karega
-      }
-    } catch (error) {
-      console.error('Database fetch error, LocalStorage fallback loading:', error);
-      const localData = JSON.parse(localStorage.getItem('mhs_challans') || '[]');
-      renderAdminTable(localData);
-    }
-  }
-
-  function renderAdminTable(records) {
-    // Note: 'adminTableBody' ki jagah apni HTML <tbody> tag ki ID likhein
-    const tableBody = document.getElementById('adminTableBody'); 
-    if (!tableBody) return;
-    
-    tableBody.innerHTML = records.map(item => `
-      <tr>
-        <td>${item.id}</td>
-        <td>${item.operator}</td>
-        <td>${item.item}</td>
-        <td>${item.debitNumeric}</td>
-        <td>${new Date(item.createdAt || item.timestamp).toLocaleString()}</td>
-      </tr>
-    `).join('');
-  }
-
-  // Page refresh / load hote hi Admin Data automatically Database se aa jayega
-  window.addEventListener('DOMContentLoaded', loadAdminDashboardData);
-
-
-
-
-
     </script>
 </body>
 </html>
