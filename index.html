@@ -1057,8 +1057,8 @@ function changeSiteTheme(themeName) {
                 return;
             }
 
-            const canModifyStatus = (authenticatedUserRole === 'HMMS' || authenticatedUserRole === 'Waqar');
-            const canDeleteRecord = (authenticatedUserRole === 'HMMS');
+            const canModifyStatus = (authenticatedUserRole === 'Hafiz Mubarak Muhammad Siddique' || authenticatedUserRole === 'Waqar Siddiqui');
+            const canDeleteRecord = (authenticatedUserRole === 'Hafiz Mubarak Muhammad Siddique');
 
             filteredRecords.forEach((record) => {
                 const remainingDue = record.debitNumeric - record.creditNumeric;
