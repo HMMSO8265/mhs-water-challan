@@ -1,66 +1,24 @@
-const express = require('express');
-const path = require('path');
-const app = express();
-
-// Middleware
-app.use(express.json());
-
-// Static Files Serve Karein (HTML, CSS, JS)
-app.use(express.static(__dirname));
-
-// Root route
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-// Aap ke baqi API routes (e.g. /api/challans) yahan rahenge...
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));const express = require('express');
-const path = require('path');
-const app = express();
-
-// Middleware
-app.use(express.json());
-
-// Static Files Serve Karein (HTML, CSS, JS)
-app.use(express.static(__dirname));
-
-// Root route
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-// Aap ke baqi API routes (e.g. /api/challans) yahan rahenge...
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
+
+// Middlewares
 app.use(cors());
 app.use(express.json());
 
-// 1. Updated Schema (Added 'status' field)
+// Serve Static Frontend Files (HTML, CSS, JS)
+app.use(express.static(__dirname));
+
+// Root route (Serves index.html)
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// 1. Schema Definition
 const ChallanSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
   isoDate: { type: String, required: true },
@@ -72,7 +30,7 @@ const ChallanSchema = new mongoose.Schema({
   quantity: { type: Number, required: true },
   debitNumeric: { type: Number, required: true },
   creditNumeric: { type: Number, default: 0 },
-  status: { type: String, default: 'Pending' } // Added status field
+  status: { type: String, default: 'Pending' }
 }, { timestamps: true });
 
 const Challan = mongoose.model('Challan', ChallanSchema);
@@ -83,6 +41,8 @@ const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://mubarak_user:Mubarak12
 mongoose.connect(MONGO_URI)
   .then(() => console.log('✅ Connected to MongoDB Atlas Successfully'))
   .catch(err => console.error('❌ Connection Error:', err));
+
+// --- API ROUTES ---
 
 // API 1: Data Save (POST)
 app.post('/api/challans', async (req, res) => {
@@ -140,5 +100,6 @@ app.delete('/api/challans', async (req, res) => {
   }
 });
 
+// Server Initialization
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
