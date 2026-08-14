@@ -979,14 +979,14 @@ function changeSiteTheme(themeName) {
 
             const credentialKey = prompt("Enter Crypt Verification Passphrase Index:");
             
-            if (credentialKey && credentialKey.trim() === "hmms12345") {
-                authenticatedUserRole = 'HMMS';
-                document.getElementById('user-badge').innerText = "Role: Developer (HMMS)";
+            if (credentialKey && credentialKey.trim() === "Hafiz8265@@@@") {
+                authenticatedUserRole = 'Hafiz Mubarak Muhammad Siddique';
+                document.getElementById('user-badge').innerText = "Role: Developer (Hafiz Mubarak Muhammad Siddique)";
                 document.getElementById('top-nav-auth-state').innerText = "Dev Active";
                 setupSystemUIAccess(true);
-            } else if (credentialKey && credentialKey.trim() === "waqar12345") {
+            } else if (credentialKey && credentialKey.trim() === "armyA415@siddiqui") {
                 authenticatedUserRole = 'Waqar';
-                document.getElementById('user-badge').innerText = "Role: Admin (Waqar)";
+                document.getElementById('user-badge').innerText = "Role: Admin (Waqar Siddiqui)";
                 document.getElementById('top-nav-auth-state').innerText = "Admin Active";
                 setupSystemUIAccess(false);
             } else if (credentialKey !== null) {
