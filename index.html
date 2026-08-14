@@ -985,10 +985,10 @@ function changeSiteTheme(themeName) {
                 document.getElementById('top-nav-auth-state').innerText = "Dev Active";
                 setupSystemUIAccess(true);
             } else if (credentialKey && credentialKey.trim() === "armyA415@siddiqui") {
-                authenticatedUserRole = 'Waqar';
+                authenticatedUserRole = 'Waqar Siddiqui';
                 document.getElementById('user-badge').innerText = "Role: Admin (Waqar Siddiqui)";
                 document.getElementById('top-nav-auth-state').innerText = "Admin Active";
-                setupSystemUIAccess(false);
+                setupSystemUIAccess(true);
             } else if (credentialKey !== null) {
                 alert("Security block alert: Access validation parameters denied.");
             }
