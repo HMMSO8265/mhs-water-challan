@@ -1,3 +1,56 @@
+const express = require('express');
+const path = require('path');
+const app = express();
+
+// Middleware
+app.use(express.json());
+
+// Static Files Serve Karein (HTML, CSS, JS)
+app.use(express.static(__dirname));
+
+// Root route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Aap ke baqi API routes (e.g. /api/challans) yahan rahenge...
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));const express = require('express');
+const path = require('path');
+const app = express();
+
+// Middleware
+app.use(express.json());
+
+// Static Files Serve Karein (HTML, CSS, JS)
+app.use(express.static(__dirname));
+
+// Root route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Aap ke baqi API routes (e.g. /api/challans) yahan rahenge...
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
