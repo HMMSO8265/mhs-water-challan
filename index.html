@@ -301,17 +301,18 @@
 
     <main class="w-full max-w-[1200px] mx-auto px-4 mt-6">
         <!-- Live Theme Switcher Dashboard -->
-<div class="theme-dashboard-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-  <h3 style="color: var(--accent-color); margin-top: 0;">🎨 Dynamic Theme Customizer</h3>
-  <p style="color: var(--text-muted); font-size: 0.9rem;">Select a color scheme for your frontend application:</p>
-  
-  <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-    <button onclick="changeSiteTheme('default')" style="background: #00ffcc; color: #000; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer;">Cyber Cyan</button>
-    <button onclick="changeSiteTheme('corporate')" style="background: #38bdf8; color: #000; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer;">Corporate Blue</button>
-    <button onclick="changeSiteTheme('redteam')" style="background: #ff003c; color: #fff; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer;">Red Team Crimson</button>
-    <button onclick="changeSiteTheme('emerald')" style="background: #10b981; color: #000; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer;">Emerald Green</button>
-  </div>
-</div>
+        <div class="theme-dashboard-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+          <h3 style="color: var(--accent-color); margin-top: 0;">🎨 Dynamic Theme Customizer</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Select a color scheme for your frontend application:</p>
+          
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button onclick="changeSiteTheme('default')" style="background: #00ffcc; color: #000; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer;">Cyber Cyan</button>
+            <button onclick="changeSiteTheme('corporate')" style="background: #38bdf8; color: #000; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer;">Corporate Blue</button>
+            <button onclick="changeSiteTheme('redteam')" style="background: #ff003c; color: #fff; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer;">Red Team Crimson</button>
+            <button onclick="changeSiteTheme('emerald')" style="background: #10b981; color: #000; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer;">Emerald Green</button>
+          </div>
+        </div>
+
         <div class="text-center">
             <h1 class="text-2xl sm:text-4xl font-bold text-white uppercase tracking-widest px-2">MHS Mineral Water Engine. <br>
                 <span class="text-cyan-400 font-light text-lg sm:text-xl tracking-normal normal-case">The Complete Hologram Fleet.</span>
@@ -982,7 +983,7 @@ function changeSiteTheme(themeName) {
             if (credentialKey && credentialKey.trim() === "Hafiz8265@@@@") {
                 authenticatedUserRole = 'Hafiz Mubarak Muhammad Siddique';
                 document.getElementById('user-badge').innerText = "Role: Developer (Hafiz Mubarak Muhammad Siddique)";
-                document.getElementById('top-nav-auth-state').innerText = "Dev Active";
+                document.getElementById('top-nav-auth-state').innerText = "Developer Active";
                 setupSystemUIAccess(true);
             } else if (credentialKey && credentialKey.trim() === "armyA415@siddiqui") {
                 authenticatedUserRole = 'Waqar Siddiqui';
