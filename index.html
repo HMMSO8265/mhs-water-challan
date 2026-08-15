@@ -486,13 +486,13 @@
                             <tr class="border-b border-slate-800 bg-slate-950 text-slate-400 uppercase text-[10px]">
                                 <th class="py-3 px-3">Challan Reference</th>
                                 <th class="py-3 px-2">Time</th>
-                                <th class="py-3 px-2">Operator</th>
+                                <th class="py-3 px-2">Operator Name</th>
                                 <th class="py-3 px-2">Mobile Number</th>
                                 <th class="py-3 px-2">Item Name</th>
                                 <th class="py-3 px-2 text-center">Quantity</th>
-                                <th class="py-3 px-2 text-red-400">Debit(Due)</th>
-                                <th class="py-3 px-2 text-emerald-400">Credit (Recv)</th>
-                                <th class="py-3 px-2 text-center">Live Status</th>
+                                <th class="py-3 px-2 text-red-400">Debit (Due)</th>
+                                <th class="py-3 px-2 text-emerald-400">Credit (Recieved)</th>
+                                <th class="py-3 px-2 text-center">Current Status</th>
                                 <th class="py-3 px-3 text-right">Action</th>
                             </tr>
                         </thead>
@@ -511,22 +511,22 @@
         <div class="challan-box flex flex-col justify-between max-h-[95vh] overflow-y-auto" id="challan-print-area">
             <div>
                 <div class="flex justify-between items-center border-b border-cyan-500/30 pb-3 mb-4">
-                    <span class="mono-label text-cyan-400 text-xs font-bold">MHS SYSTEM CHALLAN</span>
+                    <span class="mono-label text-cyan-400 text-xs font-bold">MHS CHALLAN SYSTEM</span>
                     <span class="text-[10px] text-slate-400" id="challan-id">ID: #0000</span>
                 </div>
                 
                 <div class="space-y-2 text-xs">
                     <p><span class="text-slate-500 uppercase text-[10px]">Date:</span> <span id="c-date" class="text-white font-medium"></span></p>
                     <p><span class="text-slate-500 uppercase text-[10px]">Operator Name:</span> <span id="c-name" class="text-white font-medium"></span></p>
-                    <p><span class="text-slate-500 uppercase text-[10px]">Contact Base:</span> <span id="c-phone" class="text-white font-medium"></span></p>
+                    <p><span class="text-slate-500 uppercase text-[10px]">Mobile Number:</span> <span id="c-phone" class="text-white font-medium"></span></p>
                     
                     <div class="border-t border-b border-slate-800 my-4 py-3">
                         <table class="w-full text-left table-fixed">
                             <thead>
                                 <tr class="text-[10px] text-slate-500 uppercase">
-                                    <th class="w-2/5">Item Matrix</th>
+                                    <th class="w-2/5">Item Name</th>
                                     <th class="text-center w-1/5">Rate</th>
-                                    <th class="text-center w-1/5">Qty</th>
+                                    <th class="text-center w-1/5">Order Quantity</th>
                                     <th class="text-right w-1/5">Net Total</th>
                                 </tr>
                             </thead>
@@ -569,7 +569,7 @@
                         <textPath href="#textPathTop" startOffset="50%" text-anchor="middle">H # 639 - C BLOCK Q MODEL TOWN LAHORE</textPath>
                     </text>
                     <text fill="rgba(255, 255, 255, 0.4)" font-size="8" font-weight="500" font-family="'Rajdhani', sans-serif" letter-spacing="3">
-                        <textPath href="#textPathBottom" startOffset="50%" text-anchor="middle">★★★ ORIGINAL ARCHIVE ★★★</textPath>
+                        <textPath href="#textPathBottom" startOffset="50%" text-anchor="middle">★ ★ ★ ★ ★ ★ ★ Hafiz Mubarak Muhammad Siddique ★ ★ ★ ★ ★ ★ ★</textPath>
                     </text>
                 </svg>
             </div>
@@ -606,7 +606,7 @@
                         <label class="text-[9px] text-slate-400 uppercase block mb-1">Cash Received Amount (Rs.)</label>
                         <input type="number" id="ip-amount" min="1" placeholder="Enter Cash Received" class="w-full text-xs bg-slate-900 border border-slate-700 rounded px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-cyan-500" required>
                     </div>
-                    <button type="submit" class="btn-grass font-bold text-xs px-5 py-2.5 rounded-lg transition-all text-center"><span>Apply Payment Credit</span></button>
+                    <button type="submit" class="btn-grass font-bold text-xs px-5 py-2.5 rounded-lg transition-all text-center"><span>Add Payment Credit</span></button>
                 </form>
             </div>
 
@@ -616,12 +616,12 @@
                     <thead>
                         <tr class="border-b border-slate-800 bg-slate-950 text-slate-400 uppercase text-[10px]">
                             <th class="py-2.5 px-3">Challan Reference</th>
-                            <th class="py-2.5 px-2">Timestamp</th>
-                            <th class="py-2.5 px-2">Item Blueprint</th>
-                            <th class="py-2.5 px-2 text-center">Ordered Qty</th>
-                            <th class="py-2.5 px-2">Base Rate</th>
+                            <th class="py-2.5 px-2">Time</th>
+                            <th class="py-2.5 px-2">Item Name</th>
+                            <th class="py-2.5 px-2 text-center">Ordered Quantity</th>
+                            <th class="py-2.5 px-2">Rate</th>
                             <th class="py-2.5 px-2 text-red-400">Total Debit (Due)</th>
-                            <th class="py-2.5 px-2 text-emerald-400">Total Credit (Recv)</th>
+                            <th class="py-2.5 px-2 text-emerald-400">Total Credit (Recieved)</th>
                             <th class="py-2.5 px-3 text-right">Workflow Status</th>
                         </tr>
                     </thead>
