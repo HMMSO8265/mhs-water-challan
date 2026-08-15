@@ -39,7 +39,7 @@ const Challan = mongoose.model('Challan', ChallanSchema);
 const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://mubarak_user:Mubarak12345@cluster0.yp33qco.mongodb.net/mhs_water_db?appName=Cluster0";
 
 mongoose.connect(MONGO_URI)
-  .then(() => console.log('✅ Connected to MongoDB Atlas Successfully'))
+  .then(() => console.log('✅ Connected to Mongo Database Atlas Successfully. Wellcome Back! Hafiz Mubarak Muhammad Siddique'))
   .catch(err => console.error('❌ Connection Error:', err));
 
 // --- API ROUTES ---
@@ -102,4 +102,4 @@ app.delete('/api/challans', async (req, res) => {
 
 // Server Initialization
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on port`));
