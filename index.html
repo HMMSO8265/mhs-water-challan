@@ -61,6 +61,54 @@
   --card-bg: #0b3828;
   --border-color: #134e3a;
 }
+
+/* Cyberpunk / Tech Button Styling */
+.nav-links {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.nav-btn {
+  color: #a0aec0;
+  border: 1px solid rgba(0, 243, 255, 0.2);
+  background: rgba(10, 25, 47, 0.4);
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 0 5px rgba(0, 243, 255, 0.05);
+}
+
+/* Hover Effect: Cyber Glow */
+.nav-btn:hover {
+  color: #00f3ff;
+  border-color: #00f3ff;
+  background: rgba(0, 243, 255, 0.1);
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.3), inset 0 0 10px rgba(0, 243, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Active State (Selected Tab) */
+.nav-btn.active {
+  color: #00f3ff;
+  border-color: #00f3ff;
+  background: rgba(0, 243, 255, 0.15);
+}
+
+
+
+
+
+
+
+
+
+
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
@@ -291,7 +339,7 @@
             <a href="#home" onclick="closeMobileNavbar()">Home Space</a>
             <a href="#products" onclick="closeMobileNavbar()">Products Matrix</a>
             <a href="#order-form" onclick="closeMobileNavbar()">Secure Dispatch</a>
-            <a href="#admin-panel" onclick="closeMobileNavbar()" class="text-cyan-500/60">Admin Pannel</a>
+            <a href="#admin-panel" onclick="closeMobileNavbar()" class="text-cyan-500/60">Admin Panel</a>
         </nav>
         
         <button id="top-nav-auth-state" class="premium-btn-nav btn-ripple px-3 sm:px-4 py-1.5 text-[11px] sm:text-xs rounded-md" onclick="triggerAdminAuth()">System Active</button>
